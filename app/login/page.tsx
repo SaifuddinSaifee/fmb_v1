@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const roleRedirect: Record<string, string> = {
   admin: "/admin",
@@ -11,8 +11,6 @@ const roleRedirect: Record<string, string> = {
 
 function LoginForm() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const next = searchParams.get("next");
 
   const [its, setIts] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +37,7 @@ function LoginForm() {
       }
 
       const role = data?.user?.role as string | undefined;
-      const redirectTo = next || (role ? roleRedirect[role] : "/");
+      const redirectTo = role ? roleRedirect[role] : "/";
       router.replace(redirectTo || "/");
     } catch {
       setError("Login failed. Please try again.");
