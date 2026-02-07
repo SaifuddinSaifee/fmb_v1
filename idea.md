@@ -71,12 +71,20 @@ Keep it small. These 7 are enough for MVP.
 {
   _id,
   name,
+  its,                    // ITS number (unique identifier for authentication)
+  passwordHash,           // bcrypt hashed password (NEVER store plain text)
   phoneOrEmail,
   role: "admin" | "cook" | "volunteer",
   isActive: true,
-  createdAt
+  createdAt,
+  updatedAt
 }
 ```
+
+**Authentication:**
+- ITS number is used as the username/identifier
+- Password is hashed with bcrypt (cost factor 10-12) before storing
+- During login: compare submitted password against stored hash using `bcrypt.compare()`
 
 ### 2) `stores`
 
