@@ -1,5 +1,9 @@
 import { MongoClient } from "mongodb";
 import bcrypt from "bcryptjs";
+import { config } from "dotenv";
+
+// Load environment variables from .env.local
+config({ path: ".env.local" });
 
 const uri = process.env.MONGODB_URI;
 const itsRaw = process.env.ADMIN_ITS;
@@ -27,7 +31,7 @@ const client = new MongoClient(uri);
 
 try {
   await client.connect();
-  const db = client.db();
+  const db = client.db("fmb");
   const users = db.collection("users");
 
   const passwordHash = await bcrypt.hash(password, 10);
@@ -49,7 +53,7 @@ try {
         createdAt: now,
       },
     },
-    { upsert: true }
+    { upsert: true },
   );
 
   if (result.upsertedId) {

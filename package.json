@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed:admin": "npx tsx scripts/seed-admin.mjs"
+    "seed:admin": "npx tsx scripts/seed-admin.mjs",
+    "seed:stores": "npx tsx scripts/seed-stores.mjs",
+    "seed:ingredients": "npx tsx scripts/seed-ingredients.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.1.0",

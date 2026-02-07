@@ -99,7 +99,7 @@ Keep it small. These 7 are enough for MVP.
 }
 ```
 
-### 3) `ingredient_items`
+### 3) `ingredients`
 
 This is your master list + private cook additions.
 

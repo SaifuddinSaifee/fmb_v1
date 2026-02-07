@@ -16,7 +16,7 @@ export type UserRecord = {
 
 export async function getUsersCollection() {
   const client = await clientPromise;
-  return client.db().collection<UserRecord>("users");
+  return client.db("fmb").collection<UserRecord>("users");
 }
 
 export async function findUserByITS(its: number) {
