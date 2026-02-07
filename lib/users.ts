@@ -9,18 +9,6 @@ import type {
   UserListFilters,
 } from "@/lib/interfaces/user";
 
-export type UserRecord = {
-  _id: ObjectId;
-  name: string;
-  its: number;
-  passwordHash: string;
-  phoneOrEmail?: string;
-  role: Role;
-  isActive: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
-
 export async function getUsersCollection() {
   const client = await clientPromise;
   return client.db("fmb").collection<UserRecord>("users");

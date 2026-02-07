@@ -9,7 +9,8 @@
     "lint": "eslint",
     "seed:admin": "npx tsx scripts/seed-admin.mjs",
     "seed:stores": "npx tsx scripts/seed-stores.mjs",
-    "seed:ingredients": "npx tsx scripts/seed-ingredients.mjs"
+    "seed:ingredients": "npx tsx scripts/seed-ingredients.mjs",
+    "create:indexes": "npx tsx scripts/create-indexes.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.1.0",

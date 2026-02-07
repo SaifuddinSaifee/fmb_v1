@@ -7,7 +7,7 @@ import { SESSION_COOKIE_NAME } from "@/lib/auth/constants";
 import { updateUserPassword } from "@/lib/users";
 
 const passwordSchema = z.object({
-  password: z
+  newPassword: z
     .string()
     .min(8, "Password must be at least 8 characters")
     .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
@@ -49,7 +49,7 @@ export async function PATCH(
       );
     }
 
-    const success = await updateUserPassword(userId, parsed.data.password);
+    const success = await updateUserPassword(userId, parsed.data.newPassword);
     if (!success) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
