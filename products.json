@@ -1,0 +1,1723 @@
+{
+  "products": [
+    {
+      "id": "prod-057",
+      "name": "Almond flour",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-104",
+      "name": "Amchur powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-013",
+      "name": "Anaheim peppers",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-165",
+      "name": "Angel hair noodles",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-058",
+      "name": "Angel hair pasta",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-014",
+      "name": "Baby spinach",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-026",
+      "name": "Basil leaves (fresh)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-076",
+      "name": "Bay leaves",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-151",
+      "name": "Bell peppers – red & yellow (or mixed colors)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.263Z"
+    },
+    {
+      "id": "prod-001",
+      "name": "Bell peppers (red & yellow)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-049",
+      "name": "Besan (gram flour)",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-136",
+      "name": "Bhatura (Deep family pack)",
+      "category": "Frozen",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-094",
+      "name": "Biriyani masala",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-140",
+      "name": "Black beans (canned)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-077",
+      "name": "Black cardamom (moti elaichi)",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-168",
+      "name": "Black masoor daal",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-173",
+      "name": "Black pepper (whole)",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-095",
+      "name": "Black pepper powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-174",
+      "name": "Black rai",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-062",
+      "name": "Black-eyed peas (chawla)",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-186",
+      "name": "Blanched almonds",
+      "category": "Nuts & baking",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-022",
+      "name": "Bottle gourd (doodhi)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-047",
+      "name": "Bread loaves (white)",
+      "category": "Bakery",
+      "store": "Walmarts",
+      "unit": "lbs",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-002",
+      "name": "Broccoli (fresh cut)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-048",
+      "name": "Burger buns",
+      "category": "Bakery",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-033",
+      "name": "Butter",
+      "category": "Dairy and Eggs",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-015",
+      "name": "Cabbage",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-152",
+      "name": "Capsicum (green)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-086",
+      "name": "Cardamom (green)",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-003",
+      "name": "Carrots (fresh)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-004",
+      "name": "Carrots (shredded)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-132",
+      "name": "Cashews",
+      "category": "Nuts & baking",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-016",
+      "name": "Cauliflower",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-017",
+      "name": "Celery stalks",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-069",
+      "name": "Chana dal",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-112",
+      "name": "Chapli kebab masala (Shan)",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-064",
+      "name": "Chickpeas (white kabuli chana)",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-116",
+      "name": "Ching's soy sauce",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-181",
+      "name": "Ching’s soy sauce",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-182",
+      "name": "Chings red hot sauce",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-027",
+      "name": "Cilantro",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-180",
+      "name": "Cinnamon Powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-078",
+      "name": "Cinnamon sticks",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-079",
+      "name": "Cloves",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-023",
+      "name": "Cluster beans (guwar fresh)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-138",
+      "name": "Cluster beans (guwar frozen)",
+      "category": "Frozen",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-187",
+      "name": "Cluster beans (guwar or guvaar), pre-cut (frozen)",
+      "category": "Frozen",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-141",
+      "name": "Coconut milk (canned)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-024",
+      "name": "Coleslaw mix",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-096",
+      "name": "Coriander powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-080",
+      "name": "Coriander seeds",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-150",
+      "name": "Corn (cream-style cans)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-018",
+      "name": "Corn (fresh ears)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-142",
+      "name": "Corn (sweet kernels canned)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-075",
+      "name": "Corn oil",
+      "category": "Oils & fats",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-059",
+      "name": "Corn starch",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-190",
+      "name": "Corn, cream-style (big cans)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-143",
+      "name": "Cranberry sauce (jellied)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-038",
+      "name": "Cream cheese",
+      "category": "Dairy and Eggs",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-005",
+      "name": "Cucumbers (Persian)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-097",
+      "name": "Cumin powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-081",
+      "name": "Cumin seeds",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-028",
+      "name": "Curry leaves",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-060",
+      "name": "Dalia (cracked wheat)",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-164",
+      "name": "Deep tandoori naan",
+      "category": "Bakery",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-072",
+      "name": "Desi ghee",
+      "category": "Oils & fats",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-042",
+      "name": "Dinner rolls",
+      "category": "Bakery",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-175",
+      "name": "Dried mango slices (amchur)",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-098",
+      "name": "Dried mixed herbs",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-133",
+      "name": "Dry mango slices",
+      "category": "Nuts & baking",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-176",
+      "name": "Dry red chillies",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-025",
+      "name": "Eggplant (Indian baingan)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-041",
+      "name": "Eggs",
+      "category": "Dairy and Eggs",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-050",
+      "name": "Elbow macaroni",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-073",
+      "name": "Extra virgin olive oil",
+      "category": "Oils & fats",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-087",
+      "name": "Fennel seeds (saunf)",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-088",
+      "name": "Fenugreek seeds",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-153",
+      "name": "Fresh ginger (peeled)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-154",
+      "name": "Fresh Lemons (Yellow Lemon)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-188",
+      "name": "Frozen carrots",
+      "category": "Frozen",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-189",
+      "name": "Frozen guvaar",
+      "category": "Frozen",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-105",
+      "name": "Garam masala",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-029",
+      "name": "Garlic (fresh peeled)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-099",
+      "name": "Garlic powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-117",
+      "name": "Garlic salt (Costco)",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-030",
+      "name": "Ginger (fresh)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-155",
+      "name": "Ginger (Whole)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-106",
+      "name": "Ginger powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-156",
+      "name": "Green beans - fresh",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-019",
+      "name": "Green beans (fresh)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-006",
+      "name": "Green chilies",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-169",
+      "name": "Green moong daal (whole)",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-020",
+      "name": "Green onions (scallions)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-157",
+      "name": "Green Thai chilli",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-063",
+      "name": "Green whole moong",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-034",
+      "name": "Half & half",
+      "category": "Dairy and Eggs",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-035",
+      "name": "Heavy whipping cream",
+      "category": "Dairy and Eggs",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-127",
+      "name": "Hot chili sauce",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-051",
+      "name": "Idaho mashed potato powder",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-134",
+      "name": "Jaggery",
+      "category": "Nuts & baking",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-158",
+      "name": "Jalapeño",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-113",
+      "name": "Kashmiri chili powder (mild)",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-089",
+      "name": "Kashmiri chilies (whole dried)",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-183",
+      "name": "Kikkoman soy sauce",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-092",
+      "name": "Kokum (dried)",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-118",
+      "name": "Lemon juice",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-100",
+      "name": "Lemon pepper seasoning",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-007",
+      "name": "Lemons (fresh)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-021",
+      "name": "Lettuce (shredded)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-159",
+      "name": "Loki (bottle gourd)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-119",
+      "name": "Maggi chicken cubes",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-125",
+      "name": "Maggi chicken cubes (halal)",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-065",
+      "name": "Masoor dal (orange/pink)",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-070",
+      "name": "Masoor dal (whole black)",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-120",
+      "name": "Mayonnaise",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-177",
+      "name": "Methi",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-128",
+      "name": "Milk powder",
+      "category": "Nuts & baking",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-144",
+      "name": "Milkmaid (condensed milk)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-191",
+      "name": "Milkmaid (sweetened condensed milk)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-031",
+      "name": "Mint leaves",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-170",
+      "name": "Moong daal (yellow)",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-090",
+      "name": "Mustard seeds",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-043",
+      "name": "Naan (Stonefire)",
+      "category": "Bakery",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-101",
+      "name": "Onion powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-008",
+      "name": "Onions (red)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-009",
+      "name": "Onions (yellow)",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-107",
+      "name": "Paprika powder (mild)",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-032",
+      "name": "Parsley",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-108",
+      "name": "Pav bhaji masala",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-044",
+      "name": "Pav buns (for pav bhaji)",
+      "category": "Bakery",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-135",
+      "name": "Peanuts (roasted skinless)",
+      "category": "Nuts & baking",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-137",
+      "name": "Peas (frozen)",
+      "category": "Frozen",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-160",
+      "name": "Peeled garlic",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-054",
+      "name": "Pelted wheat (Sadaf)",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-061",
+      "name": "Penne pasta",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-145",
+      "name": "Pineapple (crushed canned)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-171",
+      "name": "Pink masoor daal",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-010",
+      "name": "Potatoes",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-071",
+      "name": "Rajma (kidney beans)",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-146",
+      "name": "Red beans (canned)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-114",
+      "name": "Red chili flakes",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-121",
+      "name": "Red chili garlic sauce",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-102",
+      "name": "Red chili powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-091",
+      "name": "Red chilies (whole dried)",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-161",
+      "name": "Red Onions",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-055",
+      "name": "Rice flour",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-011",
+      "name": "Roma tomatoes",
+      "category": "Produce (veg & fruit)",
+      "store": "Costco",
+      "unit": "case",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.784Z"
+    },
+    {
+      "id": "prod-122",
+      "name": "Rose water",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-178",
+      "name": "Round red mircha",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-052",
+      "name": "Royal Chef Basmati Rice",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-166",
+      "name": "Royal Chef Extra Long Basmati Rice",
+      "category": "Dry goods & grains",
+      "store": "Costco",
+      "unit": "kg",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-167",
+      "name": "Royal Chef extra-long basmati rice",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-082",
+      "name": "Saffron",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-149",
+      "name": "Salsa (mild Pace)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-109",
+      "name": "Salt",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-093",
+      "name": "Sesame seeds",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-179",
+      "name": "Shah jeera",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-083",
+      "name": "Shahi jeera (black cumin)",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-056",
+      "name": "Sharbati atta",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-039",
+      "name": "Shredded cheese",
+      "category": "Dairy and Eggs",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-129",
+      "name": "Sliced almonds",
+      "category": "Nuts & baking",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-147",
+      "name": "Sliced black olives (canned)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-040",
+      "name": "Sour cream",
+      "category": "Dairy and Eggs",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-184",
+      "name": "Soya sauce",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-084",
+      "name": "Star anise",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-130",
+      "name": "Sugar",
+      "category": "Nuts & baking",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-110",
+      "name": "Taco seasoning",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-045",
+      "name": "Taco shells",
+      "category": "Bakery",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-115",
+      "name": "Tandoori masala (Shan)",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-123",
+      "name": "Thai red curry paste",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-139",
+      "name": "Tindora (pre-cut frozen)",
+      "category": "Frozen",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-124",
+      "name": "Tomato ketchup",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-185",
+      "name": "Tomato purée",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-012",
+      "name": "Tomatoes",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-172",
+      "name": "Toor daal (split)",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-066",
+      "name": "Toor dal",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-046",
+      "name": "Tortillas",
+      "category": "Bakery",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-103",
+      "name": "Turmeric powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-067",
+      "name": "Urad dal",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-074",
+      "name": "Vegetable oil",
+      "category": "Oils & fats",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-126",
+      "name": "Vinegar",
+      "category": "Condiments & sauces",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-131",
+      "name": "Walnuts",
+      "category": "Nuts & baking",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-148",
+      "name": "Water chestnuts (canned)",
+      "category": "Canned & jarred",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-053",
+      "name": "White flour (all-purpose)",
+      "category": "Dry goods & grains",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-111",
+      "name": "White pepper powder",
+      "category": "Spices & masalas (ground)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-085",
+      "name": "Whole black pepper",
+      "category": "Spices (whole)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-036",
+      "name": "Whole milk",
+      "category": "Dairy and Eggs",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-068",
+      "name": "Yellow moong dal",
+      "category": "Legumes & pulses (dry)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-162",
+      "name": "Yellow onions",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    },
+    {
+      "id": "prod-037",
+      "name": "Yogurt",
+      "category": "Dairy and Eggs",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-24T04:32:48.785Z"
+    },
+    {
+      "id": "prod-163",
+      "name": "Zucchini",
+      "category": "Produce (veg & fruit)",
+      "store": "Not Assigned",
+      "unit": "Not Assigned",
+      "notes": "",
+      "createdAt": "2025-11-26T01:34:38.265Z"
+    }
+  ]
+}
