@@ -61,13 +61,13 @@
 - [x] ESLint config ([eslint.config.mjs](eslint.config.mjs))
 
 ### Remaining Phase 0 Tasks
-- [ ] Admin dashboard stub ([app/admin/page.tsx](app/admin/page.tsx))
-- [ ] Cook dashboard stub ([app/cook/page.tsx](app/cook/page.tsx))
-- [ ] Volunteer dashboard stub ([app/volunteer/page.tsx](app/volunteer/page.tsx))
-- [ ] Verify all seed scripts run successfully
-  - [ ] `npm run seed:admin` → creates test admin
-  - [ ] `npm run seed:stores` → creates 5 stores
-  - [ ] `npm run seed:ingredients` → creates 1,700+ ingredients
+- [X] Admin dashboard stub ([app/admin/page.tsx](app/admin/page.tsx))
+- [X] Cook dashboard stub ([app/cook/page.tsx](app/cook/page.tsx))
+- [X] Volunteer dashboard stub ([app/volunteer/page.tsx](app/volunteer/page.tsx))
+- [X] Verify all seed scripts run successfully
+  - [x] `npm run seed:admin` → creates test admin
+  - [x] `npm run seed:stores` → creates 5 stores
+  - [x] `npm run seed:ingredients` → creates 1,700+ ingredients
 
 ---
 

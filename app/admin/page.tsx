@@ -123,8 +123,8 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
 
-          {/* User Management (Future) */}
-          <Card className="opacity-60">
+          {/* User Management */}
+          <Card className="">
             <CardHeader>
               <CardTitle className="text-xl">User Management</CardTitle>
               <CardDescription className="text-base">
@@ -135,10 +135,10 @@ export default function AdminDashboard() {
               <Button
                 size="lg"
                 variant="outline"
-                disabled
                 className="h-14 w-full text-base font-medium"
+                asChild
               >
-                Manage Users
+                <Link href="/admin/users">Manage Users</Link>
               </Button>
             </CardContent>
           </Card>

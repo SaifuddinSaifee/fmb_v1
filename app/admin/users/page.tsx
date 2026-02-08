@@ -159,7 +159,7 @@ function UsersListContent() {
   return (
     <>
       {/* Header */}
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <div className="flex items-center gap-2 mb-2">
             <Link href="/admin" className="text-slate-600 hover:text-slate-900">
@@ -171,8 +171,8 @@ function UsersListContent() {
             Manage system users and their roles
           </p>
         </div>
-        <Link href="/admin/users/new">
-          <Button size="lg" className="h-12 text-base">
+        <Link href="/admin/users/new" className="w-full md:w-auto block">
+          <Button size="lg" className="h-12 w-full md:w-auto text-base cursor-pointer">
             + New User
           </Button>
         </Link>
