@@ -774,25 +774,25 @@ export default function AdminIngredientsPage() {
                         </Button>
                       </div>
                     </CardHeader>
-                    <CardContent className="flex-1 space-y-2 text-sm p-3 pt-0 sm:p-6 sm:pt-0">
-                      <div>
-                        <span className="text-slate-500">Category</span>
-                        <p className="font-medium">{ing.category}</p>
-                      </div>
-                      <div>
-                        <span className="text-slate-500">Store</span>
-                        <p className="font-medium">{ing.storeName ?? "—"}</p>
-                      </div>
-                      <div>
-                        <span className="text-slate-500">Unit</span>
-                        <p className="font-medium">{ing.defaultUnit}</p>
-                      </div>
-                      {ing.notes ? (
+                    <CardContent className="flex-1 text-sm p-3 pt-0 sm:p-6 sm:pt-0">
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                        <div>
+                          <span className="text-slate-500">Category</span>
+                          <p className="font-medium">{ing.category}</p>
+                        </div>
+                        <div>
+                          <span className="text-slate-500">Unit</span>
+                          <p className="font-medium">{ing.defaultUnit}</p>
+                        </div>
+                        <div>
+                          <span className="text-slate-500">Store</span>
+                          <p className="font-medium">{ing.storeName ?? "—"}</p>
+                        </div>
                         <div>
                           <span className="text-slate-500">Notes</span>
-                          <p className="font-medium">{ing.notes}</p>
+                          <p className="font-medium">{ing.notes || "—"}</p>
                         </div>
-                      ) : null}
+                      </div>
                     </CardContent>
                   </Card>
                 ))}

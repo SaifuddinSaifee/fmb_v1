@@ -35,7 +35,8 @@ import { Spinner } from "@/components/ui/spinner";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
-import { Checkbox } from "@/components/ui/checkbox";
+import { useStoreIngredients } from "@/hooks/use-store-ingredients";
+import { StoreIngredientsPicker } from "@/components/admin/store-ingredients-picker";
 
 type StoreRow = {
   _id: string;
@@ -44,14 +45,6 @@ type StoreRow = {
   notes: string;
   isActive: boolean;
   createdAt: string | null;
-};
-
-type EditIngredientRow = {
-  _id: string;
-  name: string;
-  category: string;
-  storeId: string | null;
-  storeName: string | null;
 };
 
 export default function AdminStoresPage() {
@@ -78,10 +71,8 @@ export default function AdminStoresPage() {
   const [formNotes, setFormNotes] = useState("");
   const [formIsActive, setFormIsActive] = useState(true);
 
-  const [editIngredients, setEditIngredients] = useState<EditIngredientRow[]>([]);
-  const [editIngredientsLoading, setEditIngredientsLoading] = useState(false);
-  const [selectedIngredientIds, setSelectedIngredientIds] = useState<Set<string>>(new Set());
-  const [editIngredientSearch, setEditIngredientSearch] = useState("");
+  const createPicker = useStoreIngredients(createOpen, null);
+  const editPicker = useStoreIngredients(editOpen && !!editing, editing?._id ?? null);
 
   const fetchStores = async () => {
     try {
@@ -114,28 +105,6 @@ export default function AdminStoresPage() {
         (s.notes && s.notes.toLowerCase().includes(q))
     );
   }, [stores, searchQuery]);
-
-  const filteredEditIngredients = useMemo(() => {
-    const q = editIngredientSearch.trim().toLowerCase();
-    let list = editIngredients;
-    if (q) {
-      list = list.filter(
-        (ing) =>
-          ing.name.toLowerCase().includes(q) ||
-          ing.category.toLowerCase().includes(q)
-      );
-    }
-    return [...list].sort((a, b) => {
-      if (!editing) return 0;
-      const aThis = a.storeId === editing._id ? 1 : 0;
-      const bThis = b.storeId === editing._id ? 1 : 0;
-      if (aThis !== bThis) return bThis - aThis;
-      const aOther = a.storeId != null && a.storeId !== editing._id ? 1 : 0;
-      const bOther = b.storeId != null && b.storeId !== editing._id ? 1 : 0;
-      if (aOther !== bOther) return aOther - bOther;
-      return a.name.localeCompare(b.name);
-    });
-  }, [editIngredients, editIngredientSearch, editing]);
 
   const openCreate = () => {
     setFormName("");
@@ -171,7 +140,26 @@ export default function AdminStoresPage() {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Failed to create");
-      setStores((prev) => [data.store, ...prev]);
+      const newStore = data.store as StoreRow;
+      setStores((prev) => [newStore, ...prev]);
+
+      if (createPicker.selectedIds.size > 0) {
+        const patchPromises = Array.from(createPicker.selectedIds).map(
+          (ingId) =>
+            fetch(`/api/admin/ingredients/${ingId}`, {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ storeId: newStore._id }),
+            })
+        );
+        const patchResults = await Promise.all(patchPromises);
+        const failed = patchResults.filter((r) => !r.ok);
+        if (failed.length > 0) {
+          throw new Error(
+            `Store created but failed to link ${failed.length} ingredient(s). Try editing the store to link them.`
+          );
+        }
+      }
       closeCreate();
     } catch (e) {
       setCreateError(e instanceof Error ? e.message : "Failed to create");
@@ -187,9 +175,6 @@ export default function AdminStoresPage() {
     setFormNotes(store.notes ?? "");
     setFormIsActive(store.isActive);
     setSaveError(null);
-    setEditIngredients([]);
-    setSelectedIngredientIds(new Set());
-    setEditIngredientSearch("");
     setEditOpen(true);
   };
 
@@ -197,48 +182,7 @@ export default function AdminStoresPage() {
     setEditOpen(false);
     setEditing(null);
     setSaveError(null);
-    setEditIngredients([]);
-    setSelectedIngredientIds(new Set());
-    setEditIngredientSearch("");
-    setEditIngredientsLoading(false);
   };
-
-  useEffect(() => {
-    if (!editOpen || !editing) return;
-    let cancelled = false;
-    setEditIngredientsLoading(true);
-    fetch("/api/admin/ingredients")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to load ingredients");
-        return res.json();
-      })
-      .then((data) => {
-        if (cancelled) return;
-        const list: EditIngredientRow[] = (data.ingredients ?? []).map(
-          (ing: { _id: string; name: string; category: string; storeId: string | null; storeName: string | null }) => ({
-            _id: ing._id,
-            name: ing.name,
-            category: ing.category,
-            storeId: ing.storeId ?? null,
-            storeName: ing.storeName ?? null,
-          })
-        );
-        setEditIngredients(list);
-        const selected = new Set(
-          list.filter((ing) => ing.storeId === editing._id).map((ing) => ing._id)
-        );
-        setSelectedIngredientIds(selected);
-      })
-      .catch(() => {
-        if (!cancelled) setEditIngredients([]);
-      })
-      .finally(() => {
-        if (!cancelled) setEditIngredientsLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [editOpen, editing?._id]);
 
   const handleSave = async () => {
     if (!editing) return;
@@ -265,11 +209,11 @@ export default function AdminStoresPage() {
         prev.map((s) => (s._id === editing._id ? data.store : s))
       );
 
-      const toAssociate = editIngredients.filter(
-        (ing) => selectedIngredientIds.has(ing._id) && ing.storeId !== editing._id
+      const toAssociate = editPicker.ingredients.filter(
+        (ing) => editPicker.selectedIds.has(ing._id) && ing.storeId !== editing._id
       );
-      const toDisassociate = editIngredients.filter(
-        (ing) => ing.storeId === editing._id && !selectedIngredientIds.has(ing._id)
+      const toDisassociate = editPicker.ingredients.filter(
+        (ing) => ing.storeId === editing._id && !editPicker.selectedIds.has(ing._id)
       );
       const patchPromises: Promise<Response>[] = [];
       for (const ing of toAssociate) {
@@ -519,6 +463,13 @@ export default function AdminStoresPage() {
               />
               <Label htmlFor="create-active">Active</Label>
             </div>
+            <StoreIngredientsPicker
+              ingredients={createPicker.ingredients}
+              loading={createPicker.loading}
+              selectedIds={createPicker.selectedIds}
+              onSelectionChange={createPicker.toggleSelectedId}
+              currentStoreId={null}
+            />
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={closeCreate} disabled={isCreating}>
@@ -575,70 +526,13 @@ export default function AdminStoresPage() {
                 />
                 <Label htmlFor="edit-active">Active</Label>
               </div>
-              <div className="grid gap-2 border-t pt-4">
-                <Label>Link ingredients to this store</Label>
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
-                  <Input
-                    type="search"
-                    placeholder="Search by name or category…"
-                    value={editIngredientSearch}
-                    onChange={(e) => setEditIngredientSearch(e.target.value)}
-                    className="pl-9"
-                  />
-                </div>
-                <div className="max-h-[240px] overflow-y-auto rounded-md border bg-slate-50">
-                  {editIngredientsLoading ? (
-                    <div className="flex items-center justify-center py-8">
-                      <Spinner className="size-6" />
-                    </div>
-                  ) : filteredEditIngredients.length === 0 ? (
-                    <div className="py-6 text-center text-sm text-slate-500">
-                      {editIngredients.length === 0
-                        ? "No ingredients in the database."
-                        : "No ingredients match your search."}
-                    </div>
-                  ) : (
-                    <ul className="divide-y divide-slate-200">
-                      {filteredEditIngredients.map((ing) => {
-                        const selected = selectedIngredientIds.has(ing._id);
-                        const otherStore = ing.storeId && ing.storeId !== editing?._id;
-                        return (
-                          <li key={ing._id}>
-                            <button
-                              type="button"
-                              className="flex w-full items-center gap-2 px-3 py-2 text-left hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 rounded-none"
-                              onClick={() => {
-                                setSelectedIngredientIds((prev) => {
-                                  const next = new Set(prev);
-                                  if (next.has(ing._id)) next.delete(ing._id);
-                                  else next.add(ing._id);
-                                  return next;
-                                });
-                              }}
-                            >
-                              <Checkbox
-                                checked={selected}
-                                onCheckedChange={() => {}}
-                                aria-hidden
-                                className="pointer-events-none shrink-0"
-                              />
-                              <span className="flex-1 min-w-0 truncate font-medium text-slate-900">
-                                {ing.name}
-                              </span>
-                              {otherStore && ing.storeName && (
-                                <span className="shrink-0 text-xs text-slate-500">
-                                  ({ing.storeName})
-                                </span>
-                              )}
-                            </button>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                </div>
-              </div>
+              <StoreIngredientsPicker
+                ingredients={editPicker.ingredients}
+                loading={editPicker.loading}
+                selectedIds={editPicker.selectedIds}
+                onSelectionChange={editPicker.toggleSelectedId}
+                currentStoreId={editing._id}
+              />
             </div>
           )}
           <DialogFooter>
