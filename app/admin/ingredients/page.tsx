@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, Fragment, useMemo } from "react";
-import { Edit2, List, Rows3, LayoutGrid, ChevronDown, ChevronRight, Trash2, Plus, Search } from "lucide-react";
+import { Edit2, List, Rows3, LayoutGrid, ChevronDown, ChevronLeft, ChevronRight, Trash2, Plus, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -96,6 +96,9 @@ export default function AdminIngredientsPage() {
 
   const [viewMode, setViewMode] = useState<ViewMode>("expandable");
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState<10 | 20 | 30>(10);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [filterCategories, setFilterCategories] = useState<Set<string>>(new Set());
@@ -338,6 +341,27 @@ export default function AdminIngredientsPage() {
 
     return [...list].sort((a, b) => a.name.localeCompare(b.name));
   }, [ingredients, searchQuery, filterCategories, filterStores]);
+
+  const totalCount = filteredAndSortedIngredients.length;
+  const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
+  const paginatedIngredients = useMemo(
+    () =>
+      filteredAndSortedIngredients.slice(
+        (page - 1) * pageSize,
+        page * pageSize
+      ),
+    [filteredAndSortedIngredients, page, pageSize]
+  );
+
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages);
+  }, [page, totalPages]);
+
+  const handlePageSizeChange = (value: string) => {
+    const n = Number(value) as 10 | 20 | 30;
+    setPageSize(n);
+    setPage(1);
+  };
 
   return (
     <main className="min-h-screen bg-slate-50 px-3 py-4 text-slate-900 sm:px-4 sm:py-6">
@@ -625,7 +649,7 @@ export default function AdminIngredientsPage() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {filteredAndSortedIngredients.map((ing) => (
+                        {paginatedIngredients.map((ing) => (
                           <TableRow key={ing._id} className="min-h-[48px]">
                             <TableCell className="font-medium py-3 pl-0">{ing.name}</TableCell>
                             <TableCell className="py-3">{ing.category}</TableCell>
@@ -675,7 +699,7 @@ export default function AdminIngredientsPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {filteredAndSortedIngredients.map((ing) => {
+                      {paginatedIngredients.map((ing) => {
                         const isExpanded = expandedIds.has(ing._id);
                         return (
                           <Fragment key={ing._id}>
@@ -749,7 +773,7 @@ export default function AdminIngredientsPage() {
               </Card>
             ) : (
               <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {filteredAndSortedIngredients.map((ing) => (
+                {paginatedIngredients.map((ing) => (
                   <Card key={ing._id} className="flex flex-col">
                     <CardHeader className="flex flex-row items-start justify-between gap-2 space-y-0 p-3 sm:p-6 sm:pb-2">
                       <CardTitle className="text-base leading-tight sm:text-lg">{ing.name}</CardTitle>
@@ -797,6 +821,59 @@ export default function AdminIngredientsPage() {
                   </Card>
                 ))}
               </div>
+            )}
+
+            {filteredAndSortedIngredients.length > 0 && (
+              <Card className="mt-4">
+                <CardContent className="flex flex-wrap items-center justify-between gap-3 py-3 sm:py-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-slate-600">Show</span>
+                    <Select
+                      value={String(pageSize)}
+                      onValueChange={handlePageSizeChange}
+                    >
+                      <SelectTrigger className="w-[72px] h-9">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="10">10</SelectItem>
+                        <SelectItem value="20">20</SelectItem>
+                        <SelectItem value="30">30</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <span className="text-sm text-slate-600">per page</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-slate-600">
+                      {totalCount === 0
+                        ? "0 items"
+                        : `Showing ${(page - 1) * pageSize + 1}–${Math.min(page * pageSize, totalCount)} of ${totalCount}`}
+                    </span>
+                    <div className="flex items-center gap-0.5">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-9 w-9"
+                        onClick={() => setPage((p) => Math.max(1, p - 1))}
+                        disabled={page <= 1}
+                        aria-label="Previous page"
+                      >
+                        <ChevronLeft className="size-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-9 w-9"
+                        onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                        disabled={page >= totalPages}
+                        aria-label="Next page"
+                      >
+                        <ChevronRight className="size-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             )}
           </>
         )}
