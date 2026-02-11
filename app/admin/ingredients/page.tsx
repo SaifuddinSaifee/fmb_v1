@@ -51,6 +51,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Spinner } from "@/components/ui/spinner";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { INGREDIENT_CATEGORIES } from "@/lib/constants/ingredient-categories";
 
 type ViewMode = "table" | "expandable" | "cards";
 
@@ -295,22 +296,7 @@ export default function AdminIngredientsPage() {
 
   const defaultUnits = ["kg", "g", "pcs", "l", "ml", "bunch", "clove", "tsp", "tbsp"];
 
-  const ingredientCategories = [
-    "Bakery",
-    "Canned & jarred",
-    "Condiments & sauces",
-    "Dairy and Eggs",
-    "Dry goods & grains",
-    "Frozen",
-    "Legumes & pulses (dry)",
-    "Nuts & baking",
-    "Oils & fats",
-    "Produce (veg & fruit)",
-    "Spices (whole)",
-    "Spices & masalas (ground)",
-    "Uncategorized",
-    "Falanu"
-  ];
+  const ingredientCategories: string[] = [...INGREDIENT_CATEGORIES];
   const categoryOptions =
     editing && formCategory && !ingredientCategories.includes(formCategory)
       ? [formCategory, ...ingredientCategories].sort()

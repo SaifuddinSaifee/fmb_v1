@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, UtensilsCrossed, Store, Users } from "lucide-react";
+import { Home, UtensilsCrossed, Store, Users, FileDown } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -95,6 +95,16 @@ export function AppSidebar() {
                 icon={Users}
               >
                 Users
+              </NavLink>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <NavLink
+                href="/admin/import-export"
+                isActive={pathname === "/admin/import-export" || pathname?.startsWith("/admin/import-export")}
+                tooltip="Import and Export"
+                icon={FileDown}
+              >
+                Import and Export
               </NavLink>
             </SidebarMenuItem>
           </SidebarMenu>
