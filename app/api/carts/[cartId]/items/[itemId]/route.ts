@@ -4,11 +4,18 @@ import { ObjectId } from "mongodb";
 import { z } from "zod";
 import { verifySessionToken } from "@/lib/auth";
 import { SESSION_COOKIE_NAME } from "@/lib/auth/constants";
-import { updateCartItemQuantity, removeItemFromCart } from "@/lib/carts";
-import { getCartItemsCollection } from "@/lib/carts";
+import {
+  updateCartItemQuantity,
+  updateCartItemUnit,
+  updateCartItemStoreAndCategory,
+  removeItemFromCart,
+} from "@/lib/carts";
 
 const updateItemSchema = z.object({
-  quantity: z.number().positive(),
+  quantity: z.number().positive().optional(),
+  unit: z.string().min(1).optional(),
+  categorySnapshot: z.string().optional(),
+  storeIdSnapshot: z.string().nullable().optional(),
 });
 
 export async function PATCH(
@@ -16,7 +23,6 @@ export async function PATCH(
   { params }: { params: Promise<{ cartId: string; itemId: string }> }
 ) {
   try {
-    // Verify authentication
     const cookieStore = await cookies();
     const token = cookieStore.get(SESSION_COOKIE_NAME);
 
@@ -24,14 +30,13 @@ export async function PATCH(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    await verifySessionToken(token.value);
-    const { itemId } = await params;
+    const user = await verifySessionToken(token.value);
+    const { cartId, itemId } = await params;
 
     if (!ObjectId.isValid(itemId)) {
       return NextResponse.json({ error: "Invalid item ID" }, { status: 400 });
     }
 
-    // Parse request body
     const body = await request.json().catch(() => null);
     const parsed = updateItemSchema.safeParse(body);
 
@@ -42,18 +47,55 @@ export async function PATCH(
       );
     }
 
-    const itemObjectId = new ObjectId(itemId);
-    const success = await updateCartItemQuantity(
-      itemObjectId,
-      parsed.data.quantity
-    );
+    const hasStoreOrCategory =
+      parsed.data.categorySnapshot !== undefined ||
+      parsed.data.storeIdSnapshot !== undefined;
+    const hasUnit = parsed.data.unit !== undefined;
 
-    if (!success) {
-      return NextResponse.json({ error: "Item not found" }, { status: 404 });
+    if ((hasStoreOrCategory || hasUnit) && user.role !== "admin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    const itemObjectId = new ObjectId(itemId);
+
+    if (parsed.data.quantity !== undefined) {
+      const success = await updateCartItemQuantity(
+        itemObjectId,
+        parsed.data.quantity
+      );
+      if (!success) {
+        return NextResponse.json({ error: "Item not found" }, { status: 404 });
+      }
+    }
+
+    if (hasUnit) {
+      const success = await updateCartItemUnit(
+        itemObjectId,
+        parsed.data.unit!
+      );
+      if (!success) {
+        return NextResponse.json({ error: "Item not found" }, { status: 404 });
+      }
+    }
+
+    if (hasStoreOrCategory) {
+      const updates: { categorySnapshot?: string; storeIdSnapshot?: ObjectId | null } = {};
+      if (parsed.data.categorySnapshot !== undefined) {
+        updates.categorySnapshot = parsed.data.categorySnapshot;
+      }
+      if (parsed.data.storeIdSnapshot !== undefined) {
+        updates.storeIdSnapshot = parsed.data.storeIdSnapshot
+          ? new ObjectId(parsed.data.storeIdSnapshot)
+          : null;
+      }
+      const success = await updateCartItemStoreAndCategory(itemObjectId, updates);
+      if (!success) {
+        return NextResponse.json({ error: "Item not found" }, { status: 404 });
+      }
     }
 
     return NextResponse.json({
-      message: "Item quantity updated",
+      message: "Item updated",
     });
   } catch (error) {
     console.error("Error updating cart item:", error);

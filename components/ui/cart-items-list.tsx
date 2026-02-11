@@ -69,73 +69,79 @@ export function CartItemsList({
               return (
                 <li
                   key={item._id}
-                  className="flex items-center gap-2 py-2 first:pt-0 last:pb-0 min-h-10"
+                  className="flex flex-col gap-0.5 py-2 first:pt-0 last:pb-0 min-h-10"
                 >
-                  <span className="w-7 shrink-0 text-base font-medium text-slate-500 tabular-nums">
-                    {getItemNumber(category, indexInCategory)}.
-                  </span>
-                  <span className="flex-1 min-w-0 text-base font-medium text-slate-900 truncate">
-                    {item.nameSnapshot}
-                  </span>
-                  <div className="flex items-center shrink-0">
-                    {isPending ? (
-                      <span className="flex items-center gap-1.5 text-sm text-slate-500">
-                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                        Saving…
-                      </span>
-                    ) : !readonly ? (
-                      <div
-                        className="flex items-center rounded-md border border-slate-200 bg-slate-50/80"
-                        role="group"
-                        aria-label={`Quantity: ${item.quantityRequested} ${item.unit}`}
-                      >
-                        <button
-                          type="button"
-                          onClick={() =>
-                            onUpdateQuantity(
-                              item._id,
-                              Math.max(1, item.quantityRequested - 1)
-                            )
-                          }
-                          disabled={isLoading || item.quantityRequested <= 1}
-                          className="flex h-7 w-7 items-center justify-center rounded-l-md text-slate-600 hover:bg-slate-200/80 hover:text-slate-900 disabled:opacity-40 disabled:hover:bg-transparent"
-                          aria-label={`Decrease ${item.nameSnapshot}`}
+                  <div className="flex items-center gap-2">
+                    <span className="w-7 shrink-0 text-base font-medium text-slate-500 tabular-nums">
+                      {getItemNumber(category, indexInCategory)}.
+                    </span>
+                    <span className="flex-1 min-w-0 text-base font-medium text-slate-900 truncate">
+                      {item.nameSnapshot}
+                    </span>
+                    <span className="text-slate-500">|</span>
+                    <div className="flex items-center shrink-0">
+                      {isPending ? (
+                        <span className="flex items-center gap-1.5 text-sm text-slate-500">
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                          Saving…
+                        </span>
+                      ) : !readonly ? (
+                        <div
+                          className="flex items-center rounded-md border border-slate-200 bg-slate-50/80"
+                          role="group"
+                          aria-label={`Quantity: ${item.quantityRequested} ${item.unit}`}
                         >
-                          <Minus className="h-3.5 w-3.5" />
-                        </button>
-                        <span className="min-w-9 px-1 py-0.5 text-center text-sm font-semibold text-slate-900 tabular-nums">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              onUpdateQuantity(
+                                item._id,
+                                Math.max(1, item.quantityRequested - 1)
+                              )
+                            }
+                            disabled={isLoading || item.quantityRequested <= 1}
+                            className="flex h-7 w-7 items-center justify-center rounded-l-md text-slate-600 hover:bg-slate-200/80 hover:text-slate-900 disabled:opacity-40 disabled:hover:bg-transparent"
+                            aria-label={`Decrease ${item.nameSnapshot}`}
+                          >
+                            <Minus className="h-3.5 w-3.5" />
+                          </button>
+                          <span className="min-w-9 px-1 py-0.5 text-center text-sm font-semibold text-slate-900 tabular-nums">
+                            {item.quantityRequested} {item.unit}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              onUpdateQuantity(item._id, item.quantityRequested + 1)
+                            }
+                            disabled={isLoading}
+                            className="flex h-7 w-7 items-center justify-center rounded-r-md text-slate-600 hover:bg-slate-200/80 hover:text-slate-900"
+                            aria-label={`Increase ${item.nameSnapshot}`}
+                          >
+                            <Plus className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      ) : (
+                        <span className="text-sm font-semibold text-slate-900 tabular-nums">
                           {item.quantityRequested} {item.unit}
                         </span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            onUpdateQuantity(item._id, item.quantityRequested + 1)
-                          }
-                          disabled={isLoading}
-                          className="flex h-7 w-7 items-center justify-center rounded-r-md text-slate-600 hover:bg-slate-200/80 hover:text-slate-900"
-                          aria-label={`Increase ${item.nameSnapshot}`}
-                        >
-                          <Plus className="h-3.5 w-3.5" />
-                        </button>
-                      </div>
-                    ) : (
-                      <span className="text-sm font-semibold text-slate-900 tabular-nums">
-                        {item.quantityRequested} {item.unit}
-                      </span>
+                      )}
+                    </div>
+                    {!readonly && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onRemoveItem(item._id)}
+                        disabled={isLoading}
+                        className="h-7 w-7 shrink-0 p-0 text-red-600 hover:bg-red-50 hover:text-red-700 rounded-md"
+                        aria-label={`Remove ${item.nameSnapshot}`}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
                     )}
                   </div>
-                  {!readonly && (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => onRemoveItem(item._id)}
-                      disabled={isLoading}
-                      className="h-7 w-7 shrink-0 p-0 text-red-600 hover:bg-red-50 hover:text-red-700 rounded-md"
-                      aria-label={`Remove ${item.nameSnapshot}`}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  )}
+                  <div className="pl-9 text-xs text-slate-500">
+                    ({item.categorySnapshot})
+                  </div>
                 </li>
               );
             })}
