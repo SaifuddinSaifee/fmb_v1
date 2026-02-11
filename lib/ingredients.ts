@@ -192,3 +192,123 @@ export async function approvePrivateIngredient(ingredientId: ObjectId | string) 
 
   return result || null;
 }
+
+/**
+ * Get all ingredients (admin only)
+ * No visibility filter; returns every ingredient in the database
+ *
+ * @returns Array of IngredientRecord sorted by category then name
+ */
+export async function getAllIngredientsForAdmin() {
+  const ingredients = await getIngredientsCollection();
+  return ingredients
+    .find({})
+    .sort({ category: 1, name: 1 })
+    .toArray();
+}
+
+/**
+ * List stores for dropdowns (id + name)
+ */
+export async function getStoresList(): Promise<{ _id: ObjectId; name: string }[]> {
+  const stores = await getStoresCollection();
+  const list = await stores.find({}, { projection: { name: 1 } }).toArray();
+  return list as { _id: ObjectId; name: string }[];
+}
+
+/**
+ * Update an ingredient by ID (admin only)
+ *
+ * @param ingredientId - The ingredient to update
+ * @param updates - Fields to update (partial)
+ * @returns Updated ingredient or null if not found
+ */
+export async function updateIngredient(
+  ingredientId: ObjectId | string,
+  updates: Partial<
+    Pick<
+      IngredientRecord,
+      | "name"
+      | "category"
+      | "defaultUnit"
+      | "storeId"
+      | "notes"
+      | "visibility"
+      | "status"
+      | "stockOnHand"
+      | "reorderThreshold"
+    >
+  >
+) {
+  const ingredients = await getIngredientsCollection();
+  const id = typeof ingredientId === "string" ? new ObjectId(ingredientId) : ingredientId;
+
+  const set: Record<string, unknown> = {};
+  if (updates.name !== undefined) set.name = updates.name;
+  if (updates.category !== undefined) set.category = updates.category;
+  if (updates.defaultUnit !== undefined) set.defaultUnit = updates.defaultUnit;
+  if (updates.storeId !== undefined) set.storeId = updates.storeId;
+  if (updates.notes !== undefined) set.notes = updates.notes;
+  if (updates.visibility !== undefined) set.visibility = updates.visibility;
+  if (updates.status !== undefined) set.status = updates.status;
+  if (updates.stockOnHand !== undefined) set.stockOnHand = updates.stockOnHand;
+  if (updates.reorderThreshold !== undefined) set.reorderThreshold = updates.reorderThreshold;
+
+  if (Object.keys(set).length === 0) {
+    return getIngredientById(id);
+  }
+
+  const result = await ingredients.findOneAndUpdate(
+    { _id: id },
+    { $set: set },
+    { returnDocument: "after" }
+  );
+
+  return result || null;
+}
+
+/**
+ * Create a new ingredient (admin only)
+ */
+export async function createIngredient(
+  data: {
+    name: string;
+    category: string;
+    defaultUnit: string;
+    storeId?: ObjectId | null;
+    notes?: string;
+    visibility?: "global" | "private";
+    status?: "active" | "pending";
+    stockOnHand?: number | null;
+    reorderThreshold?: number | null;
+  },
+  createdByAdminId?: ObjectId
+) {
+  const ingredients = await getIngredientsCollection();
+  const doc: IngredientRecord = {
+    name: data.name.trim(),
+    category: data.category.trim(),
+    defaultUnit: data.defaultUnit.trim(),
+    storeId: data.storeId ?? null,
+    notes: data.notes?.trim() ?? "",
+    visibility: data.visibility ?? "global",
+    status: data.status ?? "active",
+    ownerUserId: null,
+    stockOnHand: data.stockOnHand ?? null,
+    reorderThreshold: data.reorderThreshold ?? null,
+    createdBy: createdByAdminId,
+    createdAt: new Date(),
+  };
+  const result = await ingredients.insertOne(doc);
+  return { ...doc, _id: result.insertedId };
+}
+
+/**
+ * Delete an ingredient by ID (admin only)
+ */
+export async function deleteIngredient(ingredientId: ObjectId | string) {
+  const ingredients = await getIngredientsCollection();
+  const id = typeof ingredientId === "string" ? new ObjectId(ingredientId) : ingredientId;
+  const result = await ingredients.deleteOne({ _id: id });
+  return result.deletedCount === 1;
+}

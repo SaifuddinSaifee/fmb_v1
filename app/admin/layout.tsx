@@ -10,7 +10,7 @@ export default function AdminLayout({
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-12 shrink-0 items-center gap-2 border-b px-4">
+        <header className="flex min-h-12 shrink-0 items-center gap-2 border-b px-3 sm:px-4">
           <SidebarTrigger />
         </header>
         <div className="flex-1 overflow-auto">{children}</div>
