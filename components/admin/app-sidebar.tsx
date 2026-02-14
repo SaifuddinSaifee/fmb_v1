@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Home, UtensilsCrossed, Store, Users, FileDown, ShoppingCart } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Home, UtensilsCrossed, Store, Users, FileDown, ShoppingCart, LogOut } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarHeader,
   SidebarMenu,
@@ -46,6 +47,19 @@ function NavLink({
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { setOpenMobile, setOpen } = useSidebar();
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      setOpenMobile(false);
+      setOpen(false);
+      router.push("/login");
+    } catch {
+      router.push("/login");
+    }
+  };
 
   return (
     <Sidebar>
@@ -120,6 +134,16 @@ export function AppSidebar() {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton tooltip="Log out" onClick={handleLogout} className="w-full">
+              <LogOut className="size-4" />
+              <span>Log out</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 }
