@@ -1,98 +1,112 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useEffect, useState, useCallback } from "react";
+import { useParams } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, StickyNote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
 
-type CombinedItem = {
-  ingredientId: string;
+type CartItem = {
+  _id: string;
   nameSnapshot: string;
   categorySnapshot: string;
   storeIdSnapshot: string | null;
   quantityRequested: number;
   unit: string;
-  quantityToBuy: number | null;
+};
+
+type Cart = {
+  _id: string;
+  cookName?: string;
+  weekLabel?: string | null;
+  status: string;
+  notes?: string | null;
 };
 
 type Store = { _id: string; name: string };
 
-export default function CombinedPdfPage() {
+export default function CartPdfPage() {
   const params = useParams();
-  const searchParams = useSearchParams();
-  const id = params.id as string;
-  const groupByParam = searchParams.get("groupBy");
-  const initialGroupBy = groupByParam === "store" ? "store" : "category";
+  const cartId = params.cartId as string;
 
-  const [weekLabel, setWeekLabel] = useState<string>("");
-  const [items, setItems] = useState<CombinedItem[]>([]);
+  const [cart, setCart] = useState<Cart | null>(null);
+  const [items, setItems] = useState<CartItem[]>([]);
   const [stores, setStores] = useState<Store[]>([]);
-  const [groupBy, setGroupBy] = useState<"category" | "store">(initialGroupBy);
+  const [groupBy, setGroupBy] = useState<"category" | "store">("category");
+  const [includeNoteInPrint, setIncludeNoteInPrint] = useState(true);
+  const [addingNote, setAddingNote] = useState(false);
+  const [noteDraft, setNoteDraft] = useState("");
+  const [savingNote, setSavingNote] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    setGroupBy(initialGroupBy);
-  }, [initialGroupBy]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!id) return;
-      setIsLoading(true);
-      setError(null);
-      try {
-        const [planRes, cartRes, storesRes] = await Promise.all([
-          fetch(`/api/week-plans/${id}`),
-          fetch(`/api/week-plans/${id}/combined-cart`),
-          fetch("/api/admin/stores"),
-        ]);
-        if (!planRes.ok) throw new Error("Failed to fetch week plan");
-        if (!cartRes.ok) throw new Error("Failed to fetch combined cart");
-
-        const planData = await planRes.json();
-        const cartData = await cartRes.json();
-        const plan = planData.weekPlan;
-        const days = plan?.days ?? [];
-        const label =
-          days.length === 1
-            ? new Date((days[0]?.date ?? plan?.weekStartDate) + "T12:00:00").toLocaleDateString(
-                "en-US",
-                { weekday: "long", month: "long", day: "numeric", year: "numeric" }
-              )
-            : `Week of ${new Date((plan?.weekStartDate ?? "") + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`;
-
-        setWeekLabel(label);
-        setItems(cartData.items ?? []);
-        if (storesRes.ok) {
-          const storesData = await storesRes.json();
-          setStores(storesData.stores ?? []);
-        }
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load combined cart.");
-      } finally {
-        setIsLoading(false);
+  const fetchData = useCallback(async () => {
+    if (!cartId) return;
+    setIsLoading(true);
+    setError(null);
+    try {
+      const [cartRes, storesRes] = await Promise.all([
+        fetch(`/api/carts/${cartId}`),
+        fetch("/api/admin/stores"),
+      ]);
+      if (!cartRes.ok) throw new Error("Failed to fetch cart");
+      const data = await cartRes.json();
+      setCart(data.cart);
+      setItems(data.items ?? []);
+      if (storesRes.ok) {
+        const storesData = await storesRes.json();
+        setStores(storesData.stores ?? []);
       }
-    };
+    } catch (err) {
+      console.error(err);
+      setError("Failed to load cart.");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [cartId]);
+
+  useEffect(() => {
     fetchData();
-  }, [id]);
+  }, [fetchData]);
+
+  useEffect(() => {
+    if (cart?.notes != null && (cart.notes ?? "").trim()) {
+      setIncludeNoteInPrint(true);
+    }
+  }, [cart?.notes]);
 
   const handlePrint = () => {
     window.print();
   };
 
-  const storeNameById = useMemo(
-    () => new Map(stores.map((s) => [s._id, s.name])),
-    [stores]
-  );
+  const handleSaveNote = async () => {
+    if (!cartId) return;
+    setSavingNote(true);
+    try {
+      const res = await fetch(`/api/admin/carts/${cartId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ notes: noteDraft.trim() || null }),
+      });
+      if (res.ok) {
+        await fetchData();
+        setAddingNote(false);
+        setNoteDraft("");
+      }
+    } finally {
+      setSavingNote(false);
+    }
+  };
 
-  const getStoreName = (storeId: string | null) =>
-    storeId ? storeNameById.get(storeId) ?? "—" : "—";
+  const storeNameById = new Map(stores.map((s) => [s._id, s.name]));
+
+  const hasNote = (cart?.notes ?? "").trim().length > 0;
 
   if (isLoading) {
     return (
@@ -102,21 +116,26 @@ export default function CombinedPdfPage() {
     );
   }
 
-  if (error) {
+  if (error || !cart) {
     return (
       <main className="min-h-screen bg-slate-50 px-4 py-6">
         <div className="mx-auto max-w-2xl">
-          <p className="text-red-600">{error}</p>
+          <p className="text-red-600">{error ?? "Cart not found."}</p>
           <Button asChild className="mt-4 h-12">
-            <Link href={`/admin/week-plans/${id}`}>Back to week plan</Link>
+            <Link href="/admin/carts">Back to Carts</Link>
           </Button>
         </div>
       </main>
     );
   }
 
-  const byCategory = new Map<string, CombinedItem[]>();
-  const byStore = new Map<string, CombinedItem[]>();
+  const title = cart.cookName ? `${cart.cookName}'s cart` : "Cart";
+
+  const getStoreName = (storeId: string | null) =>
+    storeId ? storeNameById.get(storeId) ?? "—" : "—";
+
+  const byCategory = new Map<string, CartItem[]>();
+  const byStore = new Map<string, CartItem[]>();
   for (const item of items) {
     const cat = item.categorySnapshot || "Other";
     if (!byCategory.has(cat)) byCategory.set(cat, []);
@@ -138,7 +157,7 @@ export default function CombinedPdfPage() {
       <div className="mx-auto max-w-2xl">
         <div className="mb-6 flex flex-col gap-4 print:hidden sm:flex-row sm:items-center sm:justify-between">
           <Button variant="ghost" size="icon" asChild>
-            <Link href={`/admin/week-plans/${id}`} className="h-12 w-12">
+            <Link href="/admin/carts" className="h-12 w-12">
               <ChevronLeft className="h-6 w-6" />
             </Link>
           </Button>
@@ -151,15 +170,49 @@ export default function CombinedPdfPage() {
                 className="flex gap-4"
               >
                 <div className="flex items-center gap-2">
-                  <RadioGroupItem value="category" id="comb-pdf-cat" />
-                  <Label htmlFor="comb-pdf-cat" className="font-normal cursor-pointer">Category</Label>
+                  <RadioGroupItem value="category" id="pdf-cat" />
+                  <Label htmlFor="pdf-cat" className="font-normal cursor-pointer">Category</Label>
                 </div>
                 <div className="flex items-center gap-2">
-                  <RadioGroupItem value="store" id="comb-pdf-store" />
-                  <Label htmlFor="comb-pdf-store" className="font-normal cursor-pointer">Store</Label>
+                  <RadioGroupItem value="store" id="pdf-store" />
+                  <Label htmlFor="pdf-store" className="font-normal cursor-pointer">Store</Label>
                 </div>
               </RadioGroup>
             </div>
+            {!hasNote && (
+              addingNote ? (
+                <div className="flex flex-col gap-2">
+                  <Textarea
+                    value={noteDraft}
+                    onChange={(e) => setNoteDraft(e.target.value)}
+                    placeholder="Add a note for this cart…"
+                    className="min-h-[72px] w-full max-w-sm resize-y text-sm"
+                  />
+                  <div className="flex gap-2">
+                    <Button size="sm" onClick={handleSaveNote} disabled={savingNote}>
+                      {savingNote ? "Saving…" : "Save note"}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => { setAddingNote(false); setNoteDraft(""); }}
+                      disabled={savingNote}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setAddingNote(true)}
+                >
+                  <StickyNote className="mr-2 h-4 w-4" />
+                  Add note
+                </Button>
+              )
+            )}
             <Button size="lg" className="h-12 px-6 w-fit" onClick={handlePrint}>
               Print / Save as PDF
             </Button>
@@ -168,10 +221,10 @@ export default function CombinedPdfPage() {
 
         <div className="print:mb-0">
           <h1 className="text-xl font-bold text-slate-900 print:text-lg">
-            Combined Shopping List
+            {title}
           </h1>
           <p className="mt-1 text-sm text-slate-600 print:text-xs">
-            {weekLabel} · Generated{" "}
+            {cart.weekLabel ?? "—"} · Generated{" "}
             {new Date().toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
@@ -184,8 +237,29 @@ export default function CombinedPdfPage() {
           </p>
         </div>
 
+        {hasNote && (
+          <div
+            className={`mt-4 rounded border border-slate-200 bg-slate-50 p-3 text-sm text-slate-800 ${includeNoteInPrint ? "" : "print:hidden"}`}
+          >
+            <div className="flex items-center justify-between gap-2 print:hidden">
+              <p className="font-medium text-slate-600">Note</p>
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  id="include-note"
+                  checked={includeNoteInPrint}
+                  onCheckedChange={(checked) => setIncludeNoteInPrint(checked === true)}
+                />
+                <Label htmlFor="include-note" className="cursor-pointer text-slate-600">
+                  Include note in print
+                </Label>
+              </div>
+            </div>
+            <p className="mt-1 whitespace-pre-wrap print:mt-0">{cart.notes}</p>
+          </div>
+        )}
+
         {items.length === 0 ? (
-          <p className="mt-4 text-slate-600">No items in combined cart.</p>
+          <p className="mt-4 text-slate-600">No items in this cart.</p>
         ) : groupBy === "category" ? (
           <div className="mt-6 space-y-6 print:mt-4 print:space-y-4">
             {categories.map((category) => (
@@ -199,7 +273,7 @@ export default function CombinedPdfPage() {
                   <ul className="space-y-2 print:space-y-1">
                     {byCategory.get(category)!.map((item) => (
                       <li
-                        key={`${item.ingredientId}-${item.unit}`}
+                        key={item._id}
                         className="flex justify-between text-sm print:text-base"
                       >
                         <span className="font-medium text-slate-800">
@@ -231,7 +305,7 @@ export default function CombinedPdfPage() {
                     <ul className="space-y-2 print:space-y-1">
                       {storeItems.map((item) => (
                         <li
-                          key={`${item.ingredientId}-${item.unit}`}
+                          key={item._id}
                           className="flex justify-between text-sm print:text-base"
                         >
                           <span className="font-medium text-slate-800">

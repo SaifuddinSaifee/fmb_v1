@@ -42,6 +42,8 @@ export type CartRecord = {
   weekPlanId: ObjectId;
   cookId: ObjectId;
   status: "draft" | "submitted" | "finalized";
+  /** Optional admin/cook note; shown when reviewing or printing cart */
+  notes?: string | null;
   createdAt: Date;
   updatedAt: Date;
 };
