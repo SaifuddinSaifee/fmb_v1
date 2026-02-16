@@ -40,13 +40,10 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { INGREDIENT_CATEGORIES } from "@/lib/constants/ingredient-categories";
+import { ALLOWED_UNIT_VALUES, DEFAULT_UNIT, getUnitSelectOptions } from "@/lib/constants/units";
 import { parseCSV, stringifyCSV } from "@/lib/csv";
 
 const REQUIRED_HEADERS = ["Name", "Category", "Store", "Unit"];
-const DEFAULT_UNIT = "pcs";
-
-/** Allowed units (must match existing system / ingredients page). */
-const ALLOWED_UNITS = ["kg", "g", "pcs", "l", "ml", "bunch", "clove", "tsp", "tbsp"];
 
 type Store = { _id: string; name: string };
 type Ingredient = {
@@ -242,7 +239,7 @@ export default function AdminImportExportPage() {
 
   const storeNames = useMemo(() => stores.map((s) => s.name), [stores]);
   const categorySet = useMemo(() => new Set<string>(INGREDIENT_CATEGORIES), []);
-  const unitSet = useMemo(() => new Set<string>(ALLOWED_UNITS), []);
+  const unitSet = useMemo(() => new Set<string>(ALLOWED_UNIT_VALUES), []);
 
   const rowsNeedingCategoryMapping = useMemo(() => {
     const out: { rowIndex: number; name: string; value: string }[] = [];
@@ -699,9 +696,9 @@ export default function AdminImportExportPage() {
                                 <SelectValue placeholder="Select unit" />
                               </SelectTrigger>
                               <SelectContent>
-                                {ALLOWED_UNITS.map((u) => (
-                                  <SelectItem key={u} value={u}>
-                                    {u}
+                                {getUnitSelectOptions().map((opt) => (
+                                  <SelectItem key={opt.value} value={opt.value}>
+                                    {opt.label}
                                   </SelectItem>
                                 ))}
                               </SelectContent>
@@ -820,12 +817,12 @@ export default function AdminImportExportPage() {
               <ul className="list-disc pl-5 space-y-1">
                 <li><strong>Missing Name</strong> — Row is invalid; we report the row number.</li>
                 <li><strong>Missing Category or Store when Name is present</strong> — We report e.g. &quot;Category value of Chillies is missing&quot; or &quot;Category and Store value of Chillies are missing.&quot; Import cannot proceed until these are fixed in the file or you re-upload.</li>
-                <li><strong>Missing Unit</strong> — Treated as optional; we use &quot;pcs&quot; as the default. If the file has a unit value that isn’t in the allowed list, you’ll be prompted to map it to a valid unit (same as category and store).</li>
+                <li><strong>Missing Unit</strong> — Treated as optional; we use &quot;pc&quot; (pieces) as the default. If the file has a unit value that isn’t in the allowed list, you’ll be prompted to map it to a valid unit (same as category and store).</li>
                 <li><strong>Notes</strong> — Optional; empty is fine.</li>
               </ul>
               <p className="font-medium text-slate-700 pt-1">Invalid Category, Store, or Unit</p>
               <ul className="list-disc pl-5 space-y-1">
-                <li>Category must match one of the allowed categories in the app. Store must match an existing store name. Unit must match one of the allowed units (e.g. kg, g, pcs, l, ml, bunch, clove, tsp, tbsp).</li>
+                <li>Category must match one of the allowed categories in the app. Store must match an existing store name. Unit must match one of the allowed units (e.g. kg, g, pc, lbs, oz, bunch, case).</li>
                 <li>If a value doesn’t match, we don’t reject the row. We show a <strong>mapping</strong> step: you choose the correct category, store, or unit from a dropdown. The same mapping is reused for every row that has that invalid value.</li>
               </ul>
               <p className="font-medium text-slate-700 pt-1">Duplicate names</p>

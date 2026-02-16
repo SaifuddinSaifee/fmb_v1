@@ -103,7 +103,7 @@ export function ContinueCartPageContent({
           }
         }
 
-        if (cart.status === "draft") {
+        if (cart.status === "draft" || cart.status === "submitted") {
           const ingredientsRes = await fetch("/api/ingredients/search?q=");
           if (ingredientsRes.ok) {
             const { ingredients: fetchedIngredients } = await ingredientsRes.json();
@@ -319,14 +319,6 @@ export function ContinueCartPageContent({
           <Card className="border-red-200 bg-red-50" role="alert">
             <CardContent className="py-8 text-center">
               <p className="text-base text-red-700">{error}</p>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="mt-4 min-h-[48px] h-14 text-base focus-visible:ring-2 focus-visible:ring-offset-2"
-              >
-                <Link href="/cook">Back to Dashboard</Link>
-              </Button>
             </CardContent>
           </Card>
         </div>
@@ -400,12 +392,6 @@ export function ContinueCartPageContent({
               readonly
             />
           </div>
-
-          <div className="shrink-0 border-t border-slate-200 pt-4 mt-4">
-            <Button asChild variant="outline" size="lg" className="w-full h-12">
-              <Link href="/cook">Back to Dashboard</Link>
-            </Button>
-          </div>
         </div>
       </main>
     );
@@ -444,6 +430,7 @@ export function ContinueCartPageContent({
       submitButtonLabel={isDraft ? "Submit Cart for Review" : "Done Editing"}
       submitDisabled={isSubmitting || cartItems.some((i) => i._id.startsWith("temp-"))}
       showSavingHint={cartItems.some((i) => i._id.startsWith("temp-"))}
+      showEditFooter={true}
       onSelectIngredient={handleSelectIngredient}
       onOpenCart={() => setShowCartSheet(true)}
       onOpenAddMissing={() => setShowAddMissing(true)}

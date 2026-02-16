@@ -187,16 +187,6 @@ export default function CookHistoryPage() {
           </ul>
         )}
 
-        <div className="mt-6">
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="w-full min-h-[48px] h-12 text-base"
-          >
-            <Link href="/cook">Back to Dashboard</Link>
-          </Button>
-        </div>
       </div>
     </main>
   );

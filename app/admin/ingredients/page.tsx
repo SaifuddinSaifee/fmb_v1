@@ -52,6 +52,7 @@ import {
 import { Spinner } from "@/components/ui/spinner";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { INGREDIENT_CATEGORIES } from "@/lib/constants/ingredient-categories";
+import { getUnitSelectOptions } from "@/lib/constants/units";
 
 type ViewMode = "table" | "expandable" | "cards";
 
@@ -294,7 +295,7 @@ export default function AdminIngredientsPage() {
     }
   };
 
-  const defaultUnits = ["kg", "g", "pcs", "l", "ml", "bunch", "clove", "tsp", "tbsp"];
+  const unitSelectOptions = getUnitSelectOptions();
 
   const ingredientCategories: string[] = [...INGREDIENT_CATEGORIES];
   const categoryOptions =
@@ -913,9 +914,9 @@ export default function AdminIngredientsPage() {
                     <SelectValue placeholder="Select unit" />
                   </SelectTrigger>
                   <SelectContent>
-                    {defaultUnits.map((u) => (
-                      <SelectItem key={u} value={u}>
-                        {u}
+                    {unitSelectOptions.map((opt) => (
+                      <SelectItem key={opt.value} value={opt.value}>
+                        {opt.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -1064,9 +1065,9 @@ export default function AdminIngredientsPage() {
                   <SelectValue placeholder="Select unit" />
                 </SelectTrigger>
                 <SelectContent>
-                  {defaultUnits.map((u) => (
-                    <SelectItem key={u} value={u}>
-                      {u}
+                  {unitSelectOptions.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
                     </SelectItem>
                   ))}
                 </SelectContent>

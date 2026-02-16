@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { IngredientPicker } from "@/components/ui/ingredient-picker";
 import { CartItemsList, type CartItem } from "@/components/ui/cart-items-list";
@@ -7,7 +8,7 @@ import { AddMissingIngredientForm } from "@/components/ui/add-missing-ingredient
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { WeekMenuSummary, type WeekMenuDay } from "@/components/cook/week-menu-summary";
-import { Plus, ShoppingCart, X } from "lucide-react";
+import { Home, Plus, ShoppingCart, X } from "lucide-react";
 import type { IngredientRecord } from "@/lib/interfaces/ingredient";
 
 export type DraftWeekPlan = {
@@ -48,6 +49,7 @@ type DraftCartBuilderProps = {
   submitButtonLabel: string;
   submitDisabled: boolean;
   showSavingHint?: boolean;
+  showEditFooter?: boolean;
   onSelectIngredient: (ingredient: IngredientRecord) => void;
   onOpenCart: () => void;
   onOpenAddMissing: () => void;
@@ -84,6 +86,7 @@ export function DraftCartBuilder({
   submitButtonLabel,
   submitDisabled,
   showSavingHint = false,
+  showEditFooter = false,
   onSelectIngredient,
   onOpenCart,
   onOpenAddMissing,
@@ -135,12 +138,11 @@ export function DraftCartBuilder({
               <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">{title}</h1>
               <button
                 type="button"
-                onClick={onOpenCart}
-                className="self-start sm:self-center flex items-center justify-center gap-2 h-11 min-w-11 rounded-xl border border-slate-200 bg-white px-3 text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2"
-                aria-label={`Your cart, ${cartItems.length} ${cartItems.length === 1 ? "item" : "items"}. Click to open.`}
+                onClick={onOpenAddMissing}
+                className="self-start sm:self-center flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2"
+                aria-label="Add missing ingredient"
               >
-                <ShoppingCart className="h-5 w-5 shrink-0" />
-                <span className="text-sm font-semibold tabular-nums">{cartItems.length}</span>
+                <Plus className="h-5 w-5 shrink-0" />
               </button>
             </div>
             <p className="mt-2 text-base text-slate-700">{subtitle}</p>
@@ -179,7 +181,30 @@ export function DraftCartBuilder({
         </div>
       </div>
 
-      {!selectedIngredient && (
+      {!selectedIngredient && showEditFooter && (
+        <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-slate-200 bg-white px-3 py-3 sm:px-4">
+          <div className="grid grid-cols-2 gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="default"
+              onClick={onOpenCart}
+              className="h-12 w-full gap-2 text-base"
+              aria-label={`View cart (${cartItems.length} ${cartItems.length === 1 ? "item" : "items"})`}
+            >
+              <ShoppingCart className="h-5 w-5 shrink-0" />
+              View cart
+            </Button>
+            <Button variant="outline" size="default" asChild className="h-12 w-full gap-2 text-base">
+              <Link href="/cook" aria-label="Home">
+                <Home className="h-5 w-5 shrink-0" />
+                Home
+              </Link>
+            </Button>
+          </div>
+        </div>
+      )}
+      {!selectedIngredient && !showEditFooter && (
         <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-slate-200 bg-white/95 backdrop-blur">
           <div className="mx-auto w-full max-w-4xl px-4 py-3">
             <div className="grid grid-cols-2 gap-2">

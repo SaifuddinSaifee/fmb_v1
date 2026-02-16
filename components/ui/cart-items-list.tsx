@@ -159,13 +159,8 @@ export function CartItemsList({
                                   (e.currentTarget as HTMLInputElement).blur();
                                 }
                               }}
-                              style={{
-                                width: `${Math.max(
-                                  1,
-                                  (quantityDrafts[item._id] ?? `${item.quantityRequested}`).length
-                                )}ch`,
-                              }}
-                              className="h-6 min-w-2 border-0 bg-transparent p-0 text-center text-sm font-semibold text-slate-900 tabular-nums outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                              style={{ minWidth: "4ch", width: "4ch" }}
+                              className="h-6 border-0 bg-transparent p-0 text-center text-sm font-semibold text-slate-900 tabular-nums outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                               aria-label={`Quantity for ${item.nameSnapshot}`}
                               disabled={isLoading}
                             />

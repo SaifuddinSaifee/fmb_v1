@@ -403,14 +403,6 @@ export default function NewCartPage() {
 					<Card className="border-red-200 bg-red-50" role="alert">
 						<CardContent className="py-8 text-center">
 							<p className="text-base text-red-700">{error}</p>
-							<Button
-								asChild
-								variant="outline"
-								size="lg"
-								className="mt-4 min-h-[48px] h-14 text-base focus-visible:ring-2 focus-visible:ring-offset-2"
-							>
-								<Link href="/cook">Back to Dashboard</Link>
-							</Button>
 						</CardContent>
 					</Card>
 				</div>
