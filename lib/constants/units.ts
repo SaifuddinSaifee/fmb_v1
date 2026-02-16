@@ -31,7 +31,10 @@ export const ALLOWED_UNIT_VALUES: readonly string[] = UNITS.filter((u) => u.isAc
 /** Default unit when none is specified (pieces). */
 export const DEFAULT_UNIT: UnitShortName = "pc";
 
-/** Options for unit select dropdowns: { value: shortName, label: name }. */
+/** Options for unit select dropdowns: { value: shortName, label: "Name (shortName)" }. */
 export function getUnitSelectOptions(): { value: string; label: string }[] {
-  return UNITS.filter((u) => u.isActive).map((u) => ({ value: u.shortName, label: u.name }));
+  return UNITS.filter((u) => u.isActive).map((u) => ({
+    value: u.shortName,
+    label: `${u.name} (${u.shortName})`,
+  }));
 }
