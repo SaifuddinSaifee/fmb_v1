@@ -12,6 +12,10 @@ import {
 } from "@/components/ui/collapsible";
 import { ChevronDown, ChevronUp, ShoppingCart, History } from "lucide-react";
 import { WeekMenuSummary, type WeekMenuDay } from "@/components/cook/week-menu-summary";
+import { PreviewCartModal } from "@/components/cook/preview-cart-modal";
+import { useCookHomeFooterRef } from "@/components/cook/cook-home-footer-context";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { CartItemsList, type CartItem } from "@/components/ui/cart-items-list";
 
 type WeekPlan = {
   _id: string;
@@ -101,7 +105,28 @@ function CookDashboardContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
   const [showHelp, setShowHelp] = useState(false);
+  const [previewCartOpen, setPreviewCartOpen] = useState(false);
+  const [showViewCartSheet, setShowViewCartSheet] = useState(false);
+  const [viewCartItems, setViewCartItems] = useState<CartItem[]>([]);
+  const [viewCartLoading, setViewCartLoading] = useState(false);
+  const homeFooterContext = useCookHomeFooterRef();
   const submittedBanner = searchParams.get("submitted") === "1";
+
+  useEffect(() => {
+    if (!homeFooterContext) return;
+    const cartId = cart?._id != null ? String(cart._id) : null;
+    homeFooterContext.setHomeFooter({
+      cartId,
+      openViewCartSheet: () => setShowViewCartSheet(true),
+    });
+    return () => {
+      homeFooterContext.setHomeFooter({
+        cartId: null,
+        openViewCartSheet: () => {},
+      });
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- homeFooterContext is stable in practice; including it causes infinite loop (context value recreated each render)
+  }, [cart?._id]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -150,6 +175,88 @@ function CookDashboardContent() {
 
     fetchData();
   }, [router]);
+
+  useEffect(() => {
+    if (!showViewCartSheet || !cart?._id) return;
+    const cartId = String(cart._id);
+    setViewCartLoading(true);
+    setViewCartItems([]);
+    fetch(`/api/carts/${cartId}`)
+      .then((res) => (res.ok ? res.json() : { items: [] }))
+      .then((data) => {
+        const raw = (data.items ?? []) as Array<{
+          _id?: string;
+          ingredientId?: string;
+          nameSnapshot?: string;
+          categorySnapshot?: string;
+          storeIdSnapshot?: string | null;
+          quantityRequested?: number;
+          unit?: string;
+        }>;
+        setViewCartItems(
+          raw.map((it, i) => ({
+            _id: it._id ?? `item-${i}`,
+            ingredientId: it.ingredientId != null ? String(it.ingredientId) : "",
+            nameSnapshot: it.nameSnapshot ?? "",
+            categorySnapshot: it.categorySnapshot ?? "",
+            storeIdSnapshot:
+              it.storeIdSnapshot == null || it.storeIdSnapshot === ""
+                ? null
+                : String(it.storeIdSnapshot),
+            quantityRequested: Number(it.quantityRequested) || 0,
+            unit: it.unit ?? "",
+          }))
+        );
+      })
+      .catch(() => setViewCartItems([]))
+      .finally(() => setViewCartLoading(false));
+  }, [showViewCartSheet, cart?._id]);
+
+  const handleViewCartUpdateQuantity = (itemId: string, newQuantity: number) => {
+    if (!cart?._id) return;
+    const cartId = String(cart._id);
+    let previousQuantity = 0;
+    setViewCartItems((prev) =>
+      prev.map((item) => {
+        if (item._id === itemId) {
+          previousQuantity = item.quantityRequested;
+          return { ...item, quantityRequested: newQuantity };
+        }
+        return item;
+      })
+    );
+    fetch(`/api/carts/${cartId}/items/${itemId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ quantity: newQuantity }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to update quantity");
+      })
+      .catch(() => {
+        setViewCartItems((prev) =>
+          prev.map((item) =>
+            item._id === itemId
+              ? { ...item, quantityRequested: previousQuantity }
+              : item
+          )
+        );
+      });
+  };
+
+  const handleViewCartRemoveItem = async (itemId: string) => {
+    if (!cart?._id) return;
+    const cartId = String(cart._id);
+    try {
+      const res = await fetch(`/api/carts/${cartId}/items/${itemId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Failed to remove item");
+      setViewCartItems((prev) => prev.filter((item) => item._id !== itemId));
+    } catch {
+      // Keep item in list on error
+    }
+  };
 
   if (isLoading) {
     return (
@@ -273,32 +380,25 @@ function CookDashboardContent() {
             </Button>
           )}
           {dashboardState === "assignedSubmittedCart" && cart && (
-            <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <div className="mt-4">
               <Button
-                asChild
                 variant="outline"
                 size="lg"
                 className="min-h-[48px] h-12 w-full text-base font-medium focus-visible:ring-2 focus-visible:ring-offset-2"
+                onClick={() => setPreviewCartOpen(true)}
               >
-                <Link href={`/cook/cart/${cart._id}`}>View current cart</Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className="min-h-[48px] h-12 w-full text-base font-semibold focus-visible:ring-2 focus-visible:ring-offset-2"
-              >
-                <Link href={`/cook/cart/${cart._id}/edit`}>Edit current cart</Link>
+                Preview cart
               </Button>
             </div>
           )}
           {dashboardState === "assignedFinalizedCart" && cart && (
             <Button
-              asChild
               variant="outline"
               size="lg"
               className="mt-4 min-h-[48px] h-12 w-full text-base font-medium focus-visible:ring-2 focus-visible:ring-offset-2"
+              onClick={() => setPreviewCartOpen(true)}
             >
-              <Link href={`/cook/cart/${cart._id}`}>View current cart</Link>
+              Preview cart
             </Button>
           )}
 
@@ -375,6 +475,52 @@ function CookDashboardContent() {
             </CollapsibleContent>
           </Collapsible>
         </section>
+
+        {cart && (
+          <PreviewCartModal
+            open={previewCartOpen}
+            onOpenChange={setPreviewCartOpen}
+            cartId={cart._id}
+            userId={userId}
+            weekPlan={weekPlan ? { _id: weekPlan._id, name: weekPlan.name, weekStartDate: weekPlan.weekStartDate, assignedCookId: weekPlan.assignedCookId, days: weekPlan.days } : null}
+          />
+        )}
+
+        <Sheet open={showViewCartSheet} onOpenChange={setShowViewCartSheet}>
+          <SheetContent side="bottom" className="h-[85vh] overflow-hidden flex flex-col rounded-t-2xl">
+            <SheetHeader>
+              <SheetTitle className="text-left">Your cart</SheetTitle>
+            </SheetHeader>
+            <div className="mt-4 -mx-6 flex-1 overflow-y-auto px-6">
+              {viewCartLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <Spinner className="h-8 w-8" />
+                </div>
+              ) : (
+                <CartItemsList
+                  items={viewCartItems}
+                  onUpdateQuantity={handleViewCartUpdateQuantity}
+                  onRemoveItem={handleViewCartRemoveItem}
+                  readonly={false}
+                />
+              )}
+            </div>
+            <div className="shrink-0 border-t bg-white pt-4 pb-8 px-4">
+              {cart && (
+                <Button
+                  size="lg"
+                  className="h-14 w-full text-base font-semibold"
+                  onClick={() => {
+                    setShowViewCartSheet(false);
+                    router.push(`/cook/cart/${String(cart._id)}/edit`);
+                  }}
+                >
+                  Edit cart
+                </Button>
+              )}
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </main>
   );

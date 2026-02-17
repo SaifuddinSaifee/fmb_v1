@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { ChevronLeft, FileText, Download } from "lucide-react";
+import { ChevronLeft, ChevronDown, ChevronUp, FileText, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -396,7 +396,7 @@ export default function AdminWeekPlanDetailPage() {
           <Card>
             <CardHeader>
               <div className="flex items-start justify-between gap-3">
-                <CardTitle className="text-lg">Carts</CardTitle>
+                <CardTitle className="text-lg">Carts for this week plan</CardTitle>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="default" size="sm" className="shrink-0">
@@ -505,9 +505,6 @@ export default function AdminWeekPlanDetailPage() {
                           ) : (
                             <div className="mt-3 space-y-3">
                               <div className="flex flex-wrap gap-2">
-                                <Button variant="outline" size="sm" asChild>
-                                  <Link href={`/admin/carts/${cart._id}`}>View full cart</Link>
-                                </Button>
                                 <Button
                                   variant="outline"
                                   size="sm"
@@ -516,23 +513,28 @@ export default function AdminWeekPlanDetailPage() {
                                     setModalOpen(true);
                                   }}
                                 >
-                                  Quick view
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => {
-                                    if (expandedCartId === cart._id) {
-                                      setExpandedCartId(null);
-                                      return;
-                                    }
-                                    setExpandedCartId(cart._id);
-                                    fetchCartItems(cart._id);
-                                  }}
-                                >
-                                  {expandedCartId === cart._id ? "Hide inline items" : "Show inline items"}
+                                  Quick actions
                                 </Button>
                               </div>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (expandedCartId === cart._id) {
+                                    setExpandedCartId(null);
+                                    return;
+                                  }
+                                  setExpandedCartId(cart._id);
+                                  fetchCartItems(cart._id);
+                                }}
+                                className="flex w-full items-center justify-between gap-2 rounded-md border border-slate-300 bg-white px-3 py-2.5 text-left text-sm font-medium text-slate-800 shadow-sm transition-colors hover:bg-slate-50 hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-1"
+                              >
+                                <span>{expandedCartId === cart._id ? "Hide inline items" : "Show inline items"}</span>
+                                {expandedCartId === cart._id ? (
+                                  <ChevronUp className="h-4 w-4 shrink-0 text-slate-600" />
+                                ) : (
+                                  <ChevronDown className="h-4 w-4 shrink-0 text-slate-600" />
+                                )}
+                              </button>
                               {expandedCartId === cart._id && (
                                 loadingCartId === cart._id ? (
                                   <p className="text-sm text-slate-600">Loading…</p>

@@ -300,6 +300,25 @@ export function IngredientPicker({
                     </div>
                   </div>
                 ))
+              ) : displayedIngredients.length === 0 ? (
+                // Empty state when search has no results
+                <div className="py-8 text-center text-gray-500 space-y-3">
+                  <p>
+                    {searchQuery
+                      ? `No ingredients found for "${searchQuery}"`
+                      : "No ingredients available"}
+                  </p>
+                  {searchQuery && onAddMissing && (
+                    <button
+                      type="button"
+                      onClick={onAddMissing}
+                      className="text-primary font-medium underline underline-offset-2 hover:no-underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+                      disabled={disabled}
+                    >
+                      Add missing ingredient
+                    </button>
+                  )}
+                </div>
               ) : (
                 // Flat list
                 <div className="space-y-2">
@@ -325,10 +344,22 @@ export function IngredientPicker({
       {(!groupByCategory || searchQuery || categories.length === 0) && (
         <div className={listClassName}>
           {displayedIngredients.length === 0 ? (
-            <div className="py-8 text-center text-gray-500">
-              {searchQuery
-                ? `No ingredients found for "${searchQuery}"`
-                : "No ingredients available"}
+            <div className="py-8 text-center text-gray-500 space-y-3">
+              <p>
+                {searchQuery
+                  ? `No ingredients found for "${searchQuery}"`
+                  : "No ingredients available"}
+              </p>
+              {searchQuery && onAddMissing && (
+                <button
+                  type="button"
+                  onClick={onAddMissing}
+                  className="text-primary font-medium underline underline-offset-2 hover:no-underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+                  disabled={disabled}
+                >
+                  Add missing ingredient
+                </button>
+              )}
             </div>
           ) : (
             paginatedIngredients.map((ingredient) => (

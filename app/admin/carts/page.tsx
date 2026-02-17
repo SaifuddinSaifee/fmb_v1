@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState, Fragment } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
-import { CartDetailModal } from "@/components/admin/cart-detail-modal";
+import { CombinedCartModal } from "@/components/admin/combined-cart-modal";
 
 type CartRow = {
   _id: string;
@@ -23,7 +22,8 @@ export default function AdminCartsPage() {
   const [carts, setCarts] = useState<CartRow[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedCartId, setSelectedCartId] = useState<string | null>(null);
+  const [selectedWeekPlanId, setSelectedWeekPlanId] = useState<string | null>(null);
+  const [selectedWeekLabel, setSelectedWeekLabel] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
@@ -58,13 +58,6 @@ export default function AdminCartsPage() {
     return bMax - aMax;
   });
 
-  function combinedCartNote(cooks: CartRow[]): string {
-    if (cooks.length <= 1) return "";
-    const names = cooks.map((c) => c.cookName);
-    if (names.length === 2) return `Combined cart of ${names[0]} and ${names[1]}`;
-    return `Combined cart of ${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
-  }
-
   if (isLoading) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-slate-50">
@@ -89,15 +82,15 @@ export default function AdminCartsPage() {
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-slate-900">Carts</h1>
           <p className="mt-1 text-sm text-slate-600">
-            Current and historical carts from all cooks
+            Combined carts by week plan — one entry per week; click to view merged items from all cooks
           </p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">All carts</CardTitle>
+            <CardTitle className="text-lg">Combined carts</CardTitle>
             <CardDescription>
-              Click a row to view cart details
+              One row per week plan. Click a row to view the combined cart (all cooks merged).
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -109,66 +102,53 @@ export default function AdminCartsPage() {
                   <thead>
                     <tr className="border-b border-slate-200 text-left text-slate-600">
                       <th className="pb-2 pr-4 font-medium">Week</th>
-                      <th className="pb-2 pr-4 font-medium">Cook</th>
-                      <th className="pb-2 pr-4 font-medium">Items</th>
-                      <th className="pb-2 font-medium">Updated</th>
+                      <th className="pb-2 pr-4 font-medium">Cooks</th>
+                      <th className="pb-2 font-medium">Last updated</th>
                     </tr>
                   </thead>
                   <tbody>
                     {weekIds.map((weekPlanId) => {
                       const weekCarts = groupsByWeek[weekPlanId];
-                      const note = combinedCartNote(weekCarts);
-                      const hasMultipleCooks = weekCarts.length > 1;
+                      const weekLabel = weekCarts[0]?.weekLabel ?? weekCarts[0]?.weekStartDate ?? "—";
+                      const cookCount = weekCarts.length;
+                      const lastUpdated = weekCarts.reduce(
+                        (max, c) => (new Date(c.updatedAt).getTime() > max ? new Date(c.updatedAt).getTime() : max),
+                        0
+                      );
                       return (
-                        <Fragment key={weekPlanId}>
-                          {hasMultipleCooks && (
-                            <tr key={`note-${weekPlanId}`} className="border-b border-slate-100 bg-slate-50/80">
-                              <td colSpan={4} className="py-2 pr-4 text-slate-700">
-                                <span className="font-medium">{note}.</span>{" "}
-                                <Link
-                                  href={`/admin/week-plans/${weekPlanId}`}
-                                  className="text-primary underline hover:no-underline"
-                                >
-                                  View combined cart &amp; per-cook tabs
-                                </Link>
-                              </td>
-                            </tr>
-                          )}
-                          {weekCarts.map((cart) => (
-                            <tr
-                              key={cart._id}
-                              role="button"
-                              tabIndex={0}
-                              className="cursor-pointer border-b border-slate-100 transition-colors hover:bg-slate-50"
-                              onClick={() => {
-                                setSelectedCartId(cart._id);
-                                setModalOpen(true);
-                              }}
-                              onKeyDown={(e) => {
-                                if (e.key === "Enter" || e.key === " ") {
-                                  e.preventDefault();
-                                  setSelectedCartId(cart._id);
-                                  setModalOpen(true);
-                                }
-                              }}
-                            >
-                              <td className="py-3 pr-4 text-slate-800">
-                                {cart.weekLabel ?? cart.weekStartDate ?? "—"}
-                              </td>
-                              <td className="py-3 pr-4 font-medium text-slate-900">
-                                {cart.cookName}
-                              </td>
-                              <td className="py-3 pr-4 text-slate-600">{cart.itemCount}</td>
-                              <td className="py-3 text-slate-600">
-                                {new Date(cart.updatedAt).toLocaleDateString("en-US", {
+                        <tr
+                          key={weekPlanId}
+                          role="button"
+                          tabIndex={0}
+                          className="cursor-pointer border-b border-slate-100 transition-colors hover:bg-slate-50"
+                          onClick={() => {
+                            setSelectedWeekPlanId(weekPlanId);
+                            setSelectedWeekLabel(weekCarts[0]?.weekLabel ?? weekCarts[0]?.weekStartDate ?? null);
+                            setModalOpen(true);
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              setSelectedWeekPlanId(weekPlanId);
+                              setSelectedWeekLabel(weekCarts[0]?.weekLabel ?? weekCarts[0]?.weekStartDate ?? null);
+                              setModalOpen(true);
+                            }
+                          }}
+                        >
+                          <td className="py-3 pr-4 text-slate-800">{weekLabel}</td>
+                          <td className="py-3 pr-4 font-medium text-slate-900">
+                            {cookCount} cook{cookCount === 1 ? "" : "s"}
+                          </td>
+                          <td className="py-3 text-slate-600">
+                            {lastUpdated
+                              ? new Date(lastUpdated).toLocaleDateString("en-US", {
                                   month: "short",
                                   day: "numeric",
                                   year: "numeric",
-                                })}
-                              </td>
-                            </tr>
-                          ))}
-                        </Fragment>
+                                })
+                              : "—"}
+                          </td>
+                        </tr>
                       );
                     })}
                   </tbody>
@@ -178,13 +158,17 @@ export default function AdminCartsPage() {
           </CardContent>
         </Card>
 
-        <CartDetailModal
+        <CombinedCartModal
           open={modalOpen}
           onOpenChange={(open) => {
             setModalOpen(open);
-            if (!open) setSelectedCartId(null);
+            if (!open) {
+              setSelectedWeekPlanId(null);
+              setSelectedWeekLabel(null);
+            }
           }}
-          cartId={selectedCartId}
+          weekPlanId={selectedWeekPlanId}
+          weekLabel={selectedWeekLabel}
         />
       </div>
     </main>
